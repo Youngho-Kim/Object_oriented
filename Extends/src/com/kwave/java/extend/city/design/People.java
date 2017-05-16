@@ -14,6 +14,7 @@ public class People {
 
 	public void move(String direction){
 	// 공통적인 기능은 최상위 함수로 옮겨준다.
+	// 움직이는 방향을 입력받아 프린트 문을 뿌려준다. 
 		System.out.println(direction+"방향으로 움직인다.");
 	}
 
