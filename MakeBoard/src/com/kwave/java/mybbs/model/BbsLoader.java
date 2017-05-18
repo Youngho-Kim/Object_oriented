@@ -20,19 +20,29 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.kwave.java.main.domain.Bbs;
+import com.kwave.java.mybbs.util.FileUtil;
 
 // 로컬 드라이브에 글을 읽고 쓰기
 public class BbsLoader {
 
 	final String DATABASENAME = "mybbs1.txt";	// 파일명
 	final String DATABASE_DIR = "E:/workspaces/eclipse_java/Object_oriented/MakeBoard/src/com/kwave/java/mybbs/model/";
+	final String DATABASE_COUNT = "mybbscount.db";
+	
+	
 	// 구분자
 	final String COLUMNG_SEPERATOR = "@";	// 한칸단위
 	final String RECORD_SEPERATOR = "/r/n";	// 한줄단위
+	
+	
+	
+//////////////////////////////////////////////////////////////////////////////////
+	
 	/**
 	 *  저장소에서 데이터를 읽어옴
 	 * @return		반환값에 대한 설명
 	 */
+//////////////////////////////////////////////////////////////////////////////////
 	
 		public ArrayList<Bbs> read(){	// 저장소에서 읽어오기
 			ArrayList<Bbs> result = new ArrayList<>();
@@ -75,30 +85,41 @@ public class BbsLoader {
 			return result;
 		}
 		
+		
+		
+		
+		
+		
+//////////////////////////////////////////////////////////////////////////////////		
+		
 		/**
 		 * 저장소에 데이터를 저장
 		 * @param value		텍스트 데이터
 		 */
+//////////////////////////////////////////////////////////////////////////////////
+
 		public void write(Bbs bbs){	// 새로 만든 것 - 실시간으로 파일 입출력
 				// bbs에 있는 데이터를 텍스트 파일에 저장
 				// 1. 텍스트 파일이 있는지 검사하고 없으면 생성
-			File dir = new File(DATABASE_DIR);
-			if(!dir.exists()){
-				dir.mkdirs();	// 검사한 경로상의 모든 디렉토리를 생성해준다.
-			}
-			
+//			File dir = new File(DATABASE_DIR);
+//			if(!dir.exists()){
+//				dir.mkdirs();	// 검사한 경로상의 모든 디렉토리를 생성해준다.
+//			}
+//			FileUtil util = new FileUtil();
+			FileUtil.makeDirectoryIfNotExist(DATABASE_DIR);			
 				// 1-1. 없으면 생성 
-					File database = new File(DATABASE_DIR+DATABASENAME);
-					if(!database.exists()){
-						try {
-							database.createNewFile();
-							
-						} catch (IOException e) {
-							// TODO: handle exception
-							e.printStackTrace();
-						}
-					}
-					
+//					File database = new File(DATABASE_DIR+DATABASENAME);
+//					if(!database.exists()){
+//						try {
+//							database.createNewFile();
+//							
+//						} catch (IOException e) {
+//							// TODO: handle exception
+//							e.printStackTrace();
+//						}
+//					}
+//					File database = util.getFile(DATABASENAME);
+					File database = FileUtil.getFile(DATABASENAME);
 
 				// 2. bbs에 내용을 database 파일에 저장을 한다
 					
@@ -145,86 +166,126 @@ public class BbsLoader {
 		
 		
 		
+//		
+//		
+//		public void write1(Bbs bbs){	// 기존에 만든 것. - 배열 값이 arrayList에 올라가면 파일 입출력
+//			// bbs에 있는 데이터를 텍스트 파일에 저장
+//			// 1. 텍스트 파일이 있는지 검사하고 없으면 생성
+//		File dir = new File(DATABASE_DIR);
+//		if(!dir.exists()){
+//			dir.mkdirs();	// 검사한 경로상의 모든 디렉토리를 생성해준다.
+//		}
+//		
+//			// 1-1. 없으면 생성 
+//				File database = new File(DATABASE_DIR+DATABASENAME);
+//				if(!database.exists()){
+//					try {
+//						database.createNewFile();
+//						
+//					} catch (IOException e) {
+//						// TODO: handle exception
+//						e.printStackTrace();
+//					}
+//				}
+//				
+//
+//			// 2. bbs에 내용을 database 파일에 저장을 한다
+//				
+//				
+//				
+//				
+//			// 2-1. 먼저 저장하는 데이터의 구조를 설계해야한다.
+//				
+//				
+//				
+//				
+//			// 2-1-1 구분자를 정의한다.
+//				
+//				
+//				
+//				
+//			// 2.2 bbs의 내용을 횡으로 펼친다.
+//	   String oneData = bbs.getId() + COLUMNG_SEPERATOR + 
+//						bbs.getTitle() + COLUMNG_SEPERATOR + 
+//						bbs.getAuthor() + COLUMNG_SEPERATOR + 
+//						bbs.getDate() + COLUMNG_SEPERATOR + 
+//						bbs.getView() + COLUMNG_SEPERATOR + 
+//						bbs.getContent() +RECORD_SEPERATOR;
+//			// 3. 횡으로 펼쳐진 데이터를 파일의 제일 마지막줄에 저장한다.
+//			// 3-1 JAVA 7버전부터 파일을 다루는 새로운 API인 Path와 FILES를 제공한다.
+//				Path path = Paths.get(DATABASE_DIR, DATABASENAME);
+//				
+//				try {
+//					
+//					Files.write(path, oneData.getBytes());
+//				} catch (IOException e) {
+//					// TODO: handle exception
+//					e.printStackTrace();
+//				}
+//		
+//		
+//	}
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		public void write1(Bbs bbs){	// 기존에 만든 것. - 배열 값이 arrayList에 올라가면 파일 입출력
-			// bbs에 있는 데이터를 텍스트 파일에 저장
-			// 1. 텍스트 파일이 있는지 검사하고 없으면 생성
-		File dir = new File(DATABASE_DIR);
-		if(!dir.exists()){
-			dir.mkdirs();	// 검사한 경로상의 모든 디렉토리를 생성해준다.
+//////////////////////////////////////////////////////////////////////////////////
+		/**
+		 *  조회수 만들기.
+		 * @return
+		 */
+//////////////////////////////////////////////////////////////////////////////////
+
+		public long readCount(){
+			long result=0;
+			
+			// TODO 로직
+			// 1. 위와 마찬가지로 디렉토리에 파일이 있는지 검사하고 없으면 먼저 생성해준다.
+			// 1.1 디렉토리 검사 및 생성
+//			FileUtil util = new FileUtil(); 
+			FileUtil.makeDirectoryIfNotExist(DATABASE_DIR);
+			
+				// 1.2 없으면 생성 
+			File database = FileUtil.getFile(DATABASE_DIR+DATABASE_COUNT);
+			
+			try {
+				FileReader fr = new FileReader(database);		// 1. 읽기위한 빨대 꽂기
+				BufferedReader br = new BufferedReader(fr);		// 2. 굵은 빨대
+				String number = br.readLine();					// 3. 한줄만 읽어오기
+//			String s;
+//			while ((s = br.readLine()) != null){			// 여러줄 읽기
+//				System.out.println(s);
+//			}
+				fr.close();										// 
+				// 로직
+				// 4. 읽어온 데이터에 아무것도 없으면 result에 1을 세팅
+				if(number == null){
+					result = 1;
+					
+				}else{	// 5. 데이터가 있으면 숫자로 변환하고 +1을 해서 result에 세팅
+					long tempNumber = Long.parseLong(number);
+					result = tempNumber+1;
+				}
+					
+				// 6. 데이터베이스에 최종 카운트를 저장한다.
+				FileWriter fw = new FileWriter(database); 
+				fw.write(result+"");	// 그냥 숫자값을 넣으면 안됨 
+				fw.close(); 
+
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
+			
+			return result;
 		}
 		
-			// 1-1. 없으면 생성 
-				File database = new File(DATABASE_DIR+DATABASENAME);
-				if(!database.exists()){
-					try {
-						database.createNewFile();
-						
-					} catch (IOException e) {
-						// TODO: handle exception
-						e.printStackTrace();
-					}
-				}
-				
-
-			// 2. bbs에 내용을 database 파일에 저장을 한다
-				
-				
-				
-				
-			// 2-1. 먼저 저장하는 데이터의 구조를 설계해야한다.
-				
-				
-				
-				
-			// 2-1-1 구분자를 정의한다.
-				
-				
-				
-				
-			// 2.2 bbs의 내용을 횡으로 펼친다.
-	   String oneData = bbs.getId() + COLUMNG_SEPERATOR + 
-						bbs.getTitle() + COLUMNG_SEPERATOR + 
-						bbs.getAuthor() + COLUMNG_SEPERATOR + 
-						bbs.getDate() + COLUMNG_SEPERATOR + 
-						bbs.getView() + COLUMNG_SEPERATOR + 
-						bbs.getContent() +RECORD_SEPERATOR;
-			// 3. 횡으로 펼쳐진 데이터를 파일의 제일 마지막줄에 저장한다.
-			// 3-1 JAVA 7버전부터 파일을 다루는 새로운 API인 Path와 FILES를 제공한다.
-				Path path = Paths.get(DATABASE_DIR, DATABASENAME);
-				
-				try {
-					
-					Files.write(path, oneData.getBytes());
-				} catch (IOException e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
 		
 		
-	}
+		
+		
+		
+		
+		
+		
 }

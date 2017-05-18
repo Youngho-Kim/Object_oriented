@@ -25,7 +25,7 @@ public class BbsPresenter {
 		BbsList list;
 		BbsDetail detail;
 		BbsLoader bbsloader;
-		int number = 0;
+		long number = 0;
 		
 		public BbsPresenter(){	// 생성자
 			init();
@@ -74,7 +74,10 @@ public class BbsPresenter {
 //			datas.add(input.process(scanner));
 			Bbs bbs = input.process(scanner);
 //			int number = datas.size()+1;	// array list의 배열 길이 구하기
-			number +=1;			// id
+//			number +=1;			// id
+			
+			number = bbsloader.readCount();
+			
 			bbs.setId(number);	// 글 번호
 			bbs.setDate(""+getDate());	// 날짜
 			
