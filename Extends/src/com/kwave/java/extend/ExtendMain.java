@@ -57,9 +57,6 @@ public class ExtendMain {
 		// 병원을 하나 만들고
 		Hospital hospital = new Hospital();
 		
-		// 의사를 3명
-		Doctor doctor[] = new Doctor[3];	// 의사 3명 생성
-		
 		
 		// 간호사 6명 - 각각 다른 방향으로 한번씩 움직인다.
 		Nurse nurse[] = new Nurse[6];	// 간호사 6명 생성
@@ -84,6 +81,9 @@ public class ExtendMain {
 				}
 
 		
+				// 의사를 3명
+				Doctor doctor[] = new Doctor[3];	// 의사 3명 생성
+				
 		// 각 의사가 환자를 7명씩 진찰하는 프로글매을 작성하세요
 				for(int a=0;a<doctor.length;a++)
 				{
